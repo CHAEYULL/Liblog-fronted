@@ -36,17 +36,20 @@ header {
     }
     #logo {
         margin: 0;
-        margin-left: 100px;
+        margin-left: 30px;
         padding: 15px;
         display: block;
         color: #fff;
     }
-    h3 {
+    .nav-link {
         text-align: center;
         display: block;
         width: 300px;
         box-sizing: border-box;
         float: left;
+        text-decoration: none;
+        color: #5D616C;
+        line-height: 40px;
     }
     #nav-close-button {
         border: none;
