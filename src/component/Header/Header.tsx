@@ -1,11 +1,13 @@
-import asideCloseActivate from '../function/asideCloseActivate';
-import asideOpenActivate from '../function/asideOpenActiavte';
+import asideCloseActivate from '../../function/asideCloseActivate';
+import asideOpenActivate from '../../function/asideOpenActiavte';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom'
+import './Header.scss'
+
 function Header():JSX.Element {
 
     return (
-        <body >
+        <>
             <header >
                 <nav>
                     <h1 id="logo">LiBlog</h1>
@@ -22,11 +24,11 @@ function Header():JSX.Element {
                         <Link className="nav-link" to="">도서 검색</Link>
                         <Link className="nav-link" to="/post-write">책 지필하기</Link>
                         {/* <h3 onClick={()=>{ navigate('/post-write') }}>책 지필하기</h3> */}
-                        {/* <h3 className="login-link"><FontAwesomeIcon icon={['fas', 'right-to-bracket']} size="xl" />&nbsp;&nbsp;&nbsp;로그인</h3> */}
+                        <Link className="nav-link login-link" to="/login"><FontAwesomeIcon icon={['fas', 'right-to-bracket']} size="xl" />&nbsp;&nbsp;&nbsp;로그인</Link>
                     </aside>
                  </div>
             </header>
-        </body>
+        </>
     )
 }
 export default Header

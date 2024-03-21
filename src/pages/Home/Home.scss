@@ -1,0 +1,25 @@
+* {
+    margin: 0;
+    padding: 0;
+    list-style:none;
+    text-decoration: none;
+}
+
+.newBook {
+    width: 60%;
+    margin: 100px auto;
+    ul {
+        text-align: center;
+        display: flex;
+    }
+    h3 {
+        color: #333;
+    }
+}
+
+@media screen and (max-width : 1400px) {
+    .newBook {
+        // width: 40%;
+    }
+
+  }
