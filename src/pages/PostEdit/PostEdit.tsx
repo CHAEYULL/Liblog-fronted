@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom'
 import ReactQuill from "react-quill";
-import './PostWrite.scss'
+import './PostEdit.scss'
 import 'react-quill/dist/quill.snow.css'
 import Modal from '../../component/Modal/Modal'
 
-function PostWrite(): JSX.Element {
-
+function PostEdit():JSX.Element{
     let navigate = useNavigate()
     //제목
     const [bookTitle, setBookTitle] = useState('');
@@ -16,7 +15,7 @@ function PostWrite(): JSX.Element {
     const [bookContent, setBookContent] = useState('');
 
     //지금 스테이트가 변경되는대로 그냥 막 저장이 되잖아? 
-    function appending():void{ 
+    function appending():void{
       fetch('/users/posting', {
         method : 'POST',
         headers: {'Content-Type': 'application/json'},
@@ -79,5 +78,4 @@ function PostWrite(): JSX.Element {
         </>
     )
 }
-
-export default PostWrite;
+export default PostEdit

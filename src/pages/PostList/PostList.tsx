@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import Header from '../component/Header/Header';
+import Header from '../../component/Header/Header';
+import './PostList.scss'
 type Book = {
     bookId: number,
     bookTitle: string,
@@ -31,22 +32,20 @@ function PostList(): JSX.Element {
 
     return (
         <>
-        <Header></Header>
+            <Header/>
+            <br/>
+            <br/>
+            <br/>
             <div>
-                {
-                    bookList.map((a,i) => {
-                        return(
-       
-                       <div key={i}>
-                            <div><h3>{bookList[i].bookTitle}</h3></div>
-                            <div>{bookList[i].bookContent}</div>
-                       </div>
-              
-                    )
-                    })
-                }
-                {/* <span>{bookList[0].bookTitle}</span> */}
+                {bookList.map((book, i) => (
+                    <div key={i}>
+                        <img src={"https://placehold.co/400X500"} width={'200px'} alt="" />
+                        <div><h3>{book.bookTitle}</h3></div>
+                    </div>
+                ))}
             </div>
+                
+            
         </>
     );
 }
