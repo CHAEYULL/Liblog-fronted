@@ -30,7 +30,7 @@ function PostWrite(): JSX.Element {
         }
       })
       .then((r)=>{
-        navigate('/');
+        navigate('/post-list');
       })
       .catch((e)=>{
         console.log(`에러남 : ${e}`);

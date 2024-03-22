@@ -22,6 +22,7 @@ function Header():JSX.Element {
                         <Link className="nav-link" to="/">Liblog 소개</Link>
                         <Link className="nav-link" to="">Liblog 사용법</Link>
                         <Link className="nav-link" to="">도서 검색</Link>
+                        <Link className="nav-link" to="/post-list">책 목록</Link>
                         <Link className="nav-link" to="/post-write">책 지필하기</Link>
                         {/* <h3 onClick={()=>{ navigate('/post-write') }}>책 지필하기</h3> */}
                         <Link className="nav-link login-link" to="/login"><FontAwesomeIcon icon={['fas', 'right-to-bracket']} size="xl" />&nbsp;&nbsp;&nbsp;로그인</Link>
