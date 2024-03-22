@@ -14,48 +14,37 @@ function PostWrite(): JSX.Element {
     const [hastagValue, setHashtagValue] = useState('');
     //내용
     const [bookContent, setBookContent] = useState('');
-    const PostDetail:Object = {
-      bookTitle : bookTitle, 
-      bookContent : bookContent,
-      bookPostDate : new Date(),
-    }
-    //실시간 미리보기 도와주는 함수 
-    function onChange(e:any){
-      setBookTitle(e.target.value)
-    //   console.log(e.target.value)
-    }
-    document.querySelector('.post-btn')?.addEventListener('click', function(e){
-      console.log(bookContent);
-      fetch('/users/posting', {
-          method: 'POST',
-          headers: {'Content-Type': 'application/json'},
-          body: JSON.stringify(PostDetail) // postValue를 JSON 문자열로 변환
-      })
-      .then(response => {
-          if (!response.ok) {
-              throw new Error('Network response was not ok');
-          }
-          return response.json();
-      })
-      .then(data => {
-          console.log('Success:', data);
-          // Optionally, you can navigate or perform other actions upon successful response
-          navigate('/');
-      })
-      .catch(error => {
-          console.error('Error:', error);
-      });
-  });
 
-  
+    //지금 스테이트가 변경되는대로 그냥 막 저장이 되잖아? 
+    function appending():void{
+      fetch('/users/posting', {
+        method : 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({bookTitle, bookContent}) 
+      })
+      .then((r)=>{
+        if (!r.ok){
+          throw new Error("에러남");
+        } else {
+          return r.text()
+        }
+      })
+      .then((r)=>{
+        navigate('/');
+      })
+      .catch((e)=>{
+        console.log(`에러남 : ${e}`);
+      })
+    }
+
     return (
         <>
           <div className="wrapper">
             {/* <form action="/users/posting" method="POST"> */}
                 <div className="write">
-                  <textarea name="bookTitle" id="title" onChange={onChange} placeholder="제목을 입력하세요"></textarea>
+                  <textarea id="title" onChange={(e:any)=>{setBookTitle(e.target.value)}} placeholder="제목을 입력하세요"></textarea>
                   {/* <hr/> */}
-                  <input type="text" name="hashtag" id="hashtag" onChange={onChange}  placeholder="태그를 입력하세요"/>
+                  <input name="hashtag" id="hashtag" placeholder="태그를 입력하세요"/>
                   <br/>
                   <br/>
                 <ReactQuill 
@@ -66,12 +55,11 @@ function PostWrite(): JSX.Element {
                            outline:"none",
                            padding:"0px 30px"
                         }}
-                  value={bookContent}
                   onChange={setBookContent}
                 />
                 <div className="footer">
                   <button onClick={()=>{navigate('/')}} className="cancel-btn btn">취소</button>
-                  <button className="post-btn btn" onClick={()=>{navigate('/')}}>출판하기</button>
+                  <button className="post-btn btn" onClick={appending}>출판하기</button>
                   <button className="hold-btn btn">보류</button>
                 </div>
                  </div>
