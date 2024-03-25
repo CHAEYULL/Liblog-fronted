@@ -1,25 +1,43 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'
+import React, { useState ,useEffect} from 'react';
+import { useNavigate, useParams } from 'react-router-dom'
 import ReactQuill from "react-quill";
 import './PostEdit.scss'
 import 'react-quill/dist/quill.snow.css'
-import Modal from '../../component/Modal/Modal'
 
 function PostEdit():JSX.Element{
     let navigate = useNavigate()
+    let {id} = useParams();
+    let [bookEditData, setBookEditData]:any = useState(""); 
     //제목
     const [bookTitle, setBookTitle] = useState('');
     //해쉬태그
     const [hastagValue, setHashtagValue] = useState('');
     //내용
     const [bookContent, setBookContent] = useState('');
+    useEffect(()=>{
+      fetch(`/post-edit/${id}`,{
+        method: 'GET'
+      })
+      .then((r)=>{return r.json()})
+      .then((r)=>{
+        r = JSON.stringify(r)
+        r = JSON.parse(r)
+        // console.log(r.bookTitle)
+        console.log(id)
+        setBookTitle(r.bookTitle)
+        setBookContent(r.bookContent)
+      })
+      .catch((e)=>{
+        console.log(`에러남 ${e}`)
+      })
+    },[])
 
     //지금 스테이트가 변경되는대로 그냥 막 저장이 되잖아? 
-    function appending():void{
-      fetch('/users/posting', {
+    function editing():void{
+      fetch('/users/editing', {
         method : 'POST',
         headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({bookTitle, bookContent}) 
+        body: JSON.stringify({ id ,bookTitle, bookContent}) 
       })
       .then((r)=>{
         if (!r.ok){
@@ -29,7 +47,7 @@ function PostEdit():JSX.Element{
         }
       })
       .then((r)=>{
-        navigate('/post-list');
+        navigate(`/post-detail/${id}`);
       })
       .catch((e)=>{
         console.log(`에러남 : ${e}`);
@@ -41,7 +59,7 @@ function PostEdit():JSX.Element{
           <div className="wrapper">
             {/* <form action="/users/posting" method="POST"> */}
                 <div className="write">
-                  <textarea id="title" onChange={(e:any)=>{setBookTitle(e.target.value)}} placeholder="제목을 입력하세요"></textarea>
+                  <textarea value={bookTitle} id="title" onChange={(e:any)=>{setBookTitle(e.target.value)}} placeholder="제목을 입력하세요"></textarea>
                   {/* <hr/> */}
                   <input name="hashtag" id="hashtag" placeholder="태그를 입력하세요"/>
                   <br/>
@@ -55,11 +73,11 @@ function PostEdit():JSX.Element{
                            padding:"0px 30px"
                         }}
                   onChange={setBookContent}
+                  value={bookContent}
                 />
                 <div className="footer">
                   <button onClick={()=>{navigate('/')}} className="cancel-btn btn">취소</button>
-                  <button className="post-btn btn" onClick={appending}>출판하기</button>
-                  <button className="hold-btn btn">보류</button>
+                  <button className="post-btn btn" onClick={editing}>수정하기</button>
                 </div>
                  </div>
                  <div className="preview">

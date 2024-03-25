@@ -5,9 +5,7 @@
     margin: 0; 
     padding: 0; 
   }
-  .wrapper {
-    // display: none;
-  }
+
 #title {
     margin:0px 30px;
     margin-top: 30px;
@@ -27,7 +25,7 @@
         font-size: 2rem;
     }
   }
-#hashtag {
+#intro {
     border: none;
     margin:0 30px;
     padding: 0 20px;
@@ -68,12 +66,12 @@
     float: right;
     color: #fff;
     padding: 5px 20px;
-    background-color: #C15656;
+    background-color: #252525;
   }
   
   .hold-btn {
     background-color: #fff;
-    color: #C15656;
+    color: #252525;
     float: right;
     margin-right: 40px;
   }

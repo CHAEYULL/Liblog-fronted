@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import Header from '../../component/Header/Header';
 import './PostList.scss'
+import { useNavigate } from 'react-router-dom';
 type Book = {
     bookId: number,
     bookTitle: string,
@@ -10,7 +11,7 @@ type Book = {
 function PostList(): JSX.Element {
     const [bookList, setBookList] = useState<Book[]>([]);
     console.log(bookList);
-
+    let navigate = useNavigate();
     useEffect(() => {
         fetch("/postLists", {
             method: 'GET'
@@ -22,7 +23,7 @@ function PostList(): JSX.Element {
                 return r.json();
             }
         })
-        .then((data: Book[]) => {
+        .then((data: Book[]) => {   
             setBookList(data);
         })
         .catch((e) => {
@@ -39,8 +40,10 @@ function PostList(): JSX.Element {
             <div>
                 {bookList.map((book, i) => (
                     <div key={i}>
-                        <img src={"https://placehold.co/400X500"} width={'200px'} alt="" />
-                        <div><h3>{book.bookTitle}</h3></div>
+                        <img src={"https://placehold.co/400X500"} width={'200px'} alt=""/>
+                        <div>
+                            <h3 onClick={()=>{navigate(`/post-detail/${book.bookId}`)}}>{bookList[i].bookTitle}</h3>
+                        </div>
                     </div>
                 ))}
             </div>

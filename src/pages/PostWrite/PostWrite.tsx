@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom'
 import ReactQuill from "react-quill";
 import './PostWrite.scss'
 import 'react-quill/dist/quill.snow.css'
-import Modal from '../../component/Modal/Modal'
 
 function PostWrite(): JSX.Element {
 
@@ -11,7 +10,7 @@ function PostWrite(): JSX.Element {
     //제목
     const [bookTitle, setBookTitle] = useState('');
     //해쉬태그
-    const [hastagValue, setHashtagValue] = useState('');
+    
     //내용
     const [bookContent, setBookContent] = useState('');
 
@@ -44,7 +43,7 @@ function PostWrite(): JSX.Element {
                 <div className="write">
                   <textarea id="title" onChange={(e:any)=>{setBookTitle(e.target.value)}} placeholder="제목을 입력하세요"></textarea>
                   {/* <hr/> */}
-                  <input name="hashtag" id="hashtag" placeholder="태그를 입력하세요"/>
+                  <input name="hashtag" id="intro" placeholder="책을 한 줄로 소개해주세요"/>
                   <br/>
                   <br/>
                 <ReactQuill 
